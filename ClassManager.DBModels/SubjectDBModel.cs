@@ -9,9 +9,22 @@ namespace ClassesManager.DBModels
 {
     public class SubjectDBModel
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; } //Id is generated only once and cannot be changed
         public string Name { get; set; }
         public float ECTS { get; set; }
         public FieldOfKnowledge FieldOfKnowledge { get; set; }
+
+        private SubjectDBModel() 
+        {
+            
+        }
+
+        public SubjectDBModel(string name, float ects, FieldOfKnowledge fieldOfKnowladge) 
+        {
+            Id = Guid.NewGuid();
+            Name = name;
+            ECTS = ects;
+            FieldOfKnowledge = fieldOfKnowladge;
+        }
     }
 }

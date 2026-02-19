@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassesManager.DBModels", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassesManager.CommonComponents", "..\ClassesManager.CommonComponents\ClassesManager.CommonComponents.csproj", "{F9D7E36D-107A-492D-8D8D-9F772B7724B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassesManager.UIModels", "..\ClassesManager.UIModels\ClassesManager.UIModels.csproj", "{619586B8-234B-4EED-963E-1C6C2FC276EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassesManager.Services", "..\ClassesManager.Services\ClassesManager.Services.csproj", "{3D0360BB-72B9-41E9-845E-85F0F2151373}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{F9D7E36D-107A-492D-8D8D-9F772B7724B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9D7E36D-107A-492D-8D8D-9F772B7724B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9D7E36D-107A-492D-8D8D-9F772B7724B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{619586B8-234B-4EED-963E-1C6C2FC276EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{619586B8-234B-4EED-963E-1C6C2FC276EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{619586B8-234B-4EED-963E-1C6C2FC276EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{619586B8-234B-4EED-963E-1C6C2FC276EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D0360BB-72B9-41E9-845E-85F0F2151373}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D0360BB-72B9-41E9-845E-85F0F2151373}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D0360BB-72B9-41E9-845E-85F0F2151373}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D0360BB-72B9-41E9-845E-85F0F2151373}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
