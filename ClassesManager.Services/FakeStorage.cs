@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace ClassesManager.Services
 {
+    //Static constructor to fill initial data
     internal static class FakeStorage
     {
         private static readonly List<SubjectDBModel> _subjects;

@@ -17,7 +17,7 @@ namespace ClassesManager.UIModels
         private TimeOnly _endTime;
         private string _themeOfClass;
         private TypeOfClass _typeOfClass;
-        private int _classDuration;
+        private int _classDuration; //Calculated field
 
         public Guid? Id => _dbModel?.Id; 
         public Guid SubjectId => _subjectId; 
@@ -32,7 +32,7 @@ namespace ClassesManager.UIModels
             set
             {
                 _startTime = value;
-                CalculateClassDuration();
+                CalculateClassDuration(); //Recalculating after time changing
             }
         }
         public TimeOnly EndTime 
@@ -41,7 +41,7 @@ namespace ClassesManager.UIModels
             set
             {
                 _endTime = value;
-                CalculateClassDuration();
+                CalculateClassDuration(); //Recalculating after time changing
             }
         }
         public string ThemeOfClass 
@@ -54,7 +54,7 @@ namespace ClassesManager.UIModels
             get => _typeOfClass; 
             set => _typeOfClass = value; 
         }
-        public int ClassDuration => _classDuration;
+        public int ClassDuration => _classDuration; //Duration of class in minutes
 
         public ClassesUIModel(Guid subjectId)
         {
@@ -73,6 +73,7 @@ namespace ClassesManager.UIModels
             CalculateClassDuration();
         }
 
+        //Calculating class duration
         private void CalculateClassDuration()
         {
             if (_startTime == default || _endTime == default)

@@ -33,8 +33,8 @@ namespace ClassesManager.UIModels
             get => _fieldOfKnowledge;
             set => _fieldOfKnowledge = value; 
         }
-        public IReadOnlyList<ClassesUIModel> Classes => _classes; 
-        public int AllClassesDuration  => _allClassesDuration;
+        public IReadOnlyList<ClassesUIModel> Classes => _classes; //Collection of related activiries (readonly)
+        public int AllClassesDuration  => _allClassesDuration; //Duration of all classes (calculated field)
 
         public SubjectUIModel()
         {
@@ -50,6 +50,7 @@ namespace ClassesManager.UIModels
             CalculateAllClassesDuration();
         }
 
+        //Adding new class to the subject and recalculate duration of all classes
         public void AddClass(ClassesUIModel newClass)
         {
             if (newClass != null)
@@ -59,6 +60,7 @@ namespace ClassesManager.UIModels
             }
         }
 
+        //Calculating duration of all classes
         private void CalculateAllClassesDuration()
         {
             _allClassesDuration = _classes.Sum(c => c.ClassDuration);
