@@ -17,10 +17,7 @@ namespace ClassesManager.UIModels
         private List<ClassesUIModel> _classes;
         private int _allClassesDuration;
 
-        public Guid? Id
-        {
-            get => _dbModel?.Id;
-        }
+        public Guid? Id => _dbModel?.Id;
         public string Name 
         {
             get => _name; 
@@ -36,15 +33,8 @@ namespace ClassesManager.UIModels
             get => _fieldOfKnowledge;
             set => _fieldOfKnowledge = value; 
         }
-        public IReadOnlyList<ClassesUIModel> Classes 
-        { 
-            get => _classes; 
-        }
-        public int AllClassesDuration 
-        {
-            get => _allClassesDuration;
-            set => CalculateAllClassesDuration();
-        }
+        public IReadOnlyList<ClassesUIModel> Classes => _classes; 
+        public int AllClassesDuration  => _allClassesDuration;
 
         public SubjectUIModel()
         {
@@ -60,9 +50,18 @@ namespace ClassesManager.UIModels
             CalculateAllClassesDuration();
         }
 
+        public void AddClass(ClassesUIModel newClass)
+        {
+            if (newClass != null)
+            {
+                _classes.Add(newClass);
+                CalculateAllClassesDuration();
+            }
+        }
+
         private void CalculateAllClassesDuration()
         {
-
+            _allClassesDuration = _classes.Sum(c => c.ClassDuration);
         }
     }
 }

@@ -19,14 +19,8 @@ namespace ClassesManager.UIModels
         private TypeOfClass _typeOfClass;
         private int _classDuration;
 
-        public Guid? Id 
-        { 
-            get => _dbModel?.Id; 
-        }
-        public Guid SubjectId 
-        { 
-            get => _subjectId; 
-        }
+        public Guid? Id => _dbModel?.Id; 
+        public Guid SubjectId => _subjectId; 
         public DateOnly Date 
         { 
             get => _date; 
@@ -34,13 +28,21 @@ namespace ClassesManager.UIModels
         }
         public TimeOnly StartTime 
         { 
-            get => _startTime; 
-            set => _startTime = value; 
+            get => _startTime;
+            set
+            {
+                _startTime = value;
+                CalculateClassDuration();
+            }
         }
         public TimeOnly EndTime 
         { 
-            get => _endTime; 
-            set => _endTime = value; 
+            get => _endTime;
+            set
+            {
+                _endTime = value;
+                CalculateClassDuration();
+            }
         }
         public string ThemeOfClass 
         { 
@@ -52,18 +54,14 @@ namespace ClassesManager.UIModels
             get => _typeOfClass; 
             set => _typeOfClass = value; 
         }
-        public int ClassDuration 
-        { 
-            get => _classDuration;
-            set => CalculateClassDuration();
-        }
+        public int ClassDuration => _classDuration;
 
         public ClassesUIModel(Guid subjectId)
         {
             _subjectId = subjectId;
         }
 
-        public ClassesUIModel(ClassesUIModel dbModel)
+        public ClassesUIModel(ClassesDBModel dbModel)
         {
             _dbModel = dbModel;
             _subjectId = dbModel.SubjectId;
@@ -77,6 +75,12 @@ namespace ClassesManager.UIModels
 
         private void CalculateClassDuration()
         {
+            if (_startTime == default || _endTime == default)
+            {
+                _classDuration = 0;
+                return;
+            }
+
             if (_endTime < _startTime)
             {
                 throw new InvalidOperationException();
