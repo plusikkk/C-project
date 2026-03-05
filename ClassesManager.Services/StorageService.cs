@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace ClassesManager.Services
 {
     //Service for interacting with storage (FakeStorage)
-    public class StorageService
+    public class StorageService : IStorageService
     {
         private List<SubjectDBModel> _subjects;
         private List<ClassesDBModel> _classes;
@@ -49,6 +49,12 @@ namespace ClassesManager.Services
                 }
             }
             return resultList;
+        }
+
+        public void AddClass(ClassesDBModel newClass)
+        {
+            LoadData();
+            _classes.Add(newClass);
         }
     }
 }

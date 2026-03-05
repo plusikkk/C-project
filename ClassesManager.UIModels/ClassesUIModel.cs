@@ -91,5 +91,33 @@ namespace ClassesManager.UIModels
                 _classDuration = (int)(_endTime - _startTime).TotalMinutes;
             }
         }
+
+        //Creating new object or editing existing
+        public ClassesDBModel GetDBModel()
+        {
+            if (_dbModel == null)
+            {
+                // Creating new
+                _dbModel = new ClassesDBModel(
+                    _subjectId,
+                    _date,
+                    _startTime,
+                    _endTime,
+                    _themeOfClass,
+                    _typeOfClass
+                );
+            }
+            else
+            {
+                // Editing existing
+                _dbModel.Date = _date;
+                _dbModel.StartTime = _startTime;
+                _dbModel.EndTime = _endTime;
+                _dbModel.ThemeOfClass = _themeOfClass;
+                _dbModel.TypeOfClass = _typeOfClass;
+            }
+
+            return _dbModel;
+        }
     }
 }
