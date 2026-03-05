@@ -8,8 +8,8 @@
     Title="ClassesManager">
 
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate pages:ClassesCreatePage}"
-        Route="ClassesCreatePage" />
+        Title="Subjects"
+        ContentTemplate="{DataTemplate pages:SubjectsPage}"
+        Route="SubjectsPage" />
 
 </Shell>

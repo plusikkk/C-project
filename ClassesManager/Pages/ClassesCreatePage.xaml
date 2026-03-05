@@ -10,7 +10,7 @@
             <Picker
                 x:Name="pSubject"
                 Title="Select a subject"
-                ItemDisplayBinding="{Binding Name}">></Picker>
+                ItemDisplayBinding="{Binding Name}"></Picker>
             <Label
                 Text="Date of the lesson"></Label>
             <DatePicker

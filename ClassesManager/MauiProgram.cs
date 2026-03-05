@@ -17,13 +17,12 @@ namespace ClassesManager
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-#if DEBUG
-    		builder.Logging.AddDebug();
-#endif
             builder.Services.AddSingleton<IStorageService, StorageService>();
+            builder.Services.AddTransient<SubjectsPage>();
 
-            builder.Services.AddTransient<ClassesCreatePage>();
-
+#if DEBUG
+            builder.Logging.AddDebug();
+#endif
             return builder.Build();
         }
     }
