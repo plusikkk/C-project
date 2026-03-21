@@ -1,45 +1,15 @@
-using ClassesManager.Services;
-using ClassesManager.UIModels;
-using System.Collections.ObjectModel;
+using ClassesManager.ViewModels;
 
 namespace ClassesManager.Pages;
 
 public partial class SubjectsPage : ContentPage
 {
-    private readonly IStorageService _storageService;
-
-    // ObservableCollection update the screen
-    public ObservableCollection<SubjectUIModel> Subjects { get; set; } = new ObservableCollection<SubjectUIModel>();
-
-    public SubjectsPage(IStorageService storageService)
+    // The ViewModel is injected automatically by the IoC container
+    public SubjectsPage(SubjectsViewModel viewModel)
     {
         InitializeComponent();
 
-        _storageService = storageService;
-
-        cvSubjects.ItemsSource = Subjects;
-
-        LoadSubjects();
-    }
-
-    private void LoadSubjects()
-    {
-        Subjects.Clear();
-        var dbSubjects = _storageService.GetAllSubjects();
-
-        foreach (var dbSubject in dbSubjects)
-        {
-            Subjects.Add(new SubjectUIModel(dbSubject));
-        }
-    }
-
-    private async void OnSubjectSelected(object sender, SelectionChangedEventArgs e)
-    {
-        if (e.CurrentSelection.FirstOrDefault() is SubjectUIModel selectedSubject)
-        {
-            ((CollectionView)sender).SelectedItem = null;
-
-            await Navigation.PushAsync(new SubjectDetailsPage(selectedSubject, _storageService));
-        }
+        // Setting the DataContext for MVVM bindings in XAML
+        BindingContext = viewModel;
     }
 }

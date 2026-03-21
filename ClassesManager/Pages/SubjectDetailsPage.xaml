@@ -9,40 +9,25 @@
 
             <Frame BackgroundColor="#F3F4F6" CornerRadius="10" Padding="15" HasShadow="False">
                 <VerticalStackLayout Spacing="5">
-                    <Label x:Name="lblSubjectName" FontSize="22" FontAttributes="Bold" />
-                    <Label x:Name="lblFieldOfKnowledge" FontSize="16" TextColor="DarkSlateGray" />
-                    <Label x:Name="lblEcts" FontSize="16" TextColor="DarkSlateGray" />
-                    <Label x:Name="lblTotalDuration" FontSize="16" TextColor="DarkSlateGray" FontAttributes="Italic" />
+                    <Label Text="{Binding Subject.Name}" FontSize="22" FontAttributes="Bold" />
+                    <Label Text="{Binding Subject.FieldOfKnowledge, StringFormat='Field of knowledge: {0}'}" FontSize="16" TextColor="DarkSlateGray" />
+                    <Label Text="{Binding Subject.ECTS, StringFormat='ECTS: {0}'}" FontSize="16" TextColor="DarkSlateGray" />
+                    <Label Text="{Binding Subject.TotalDuration, StringFormat='Total duration: {0} minutes'}" FontSize="16" TextColor="DarkSlateGray" FontAttributes="Italic" />
                 </VerticalStackLayout>
             </Frame>
 
             <Label Text="List of planned lessons:" FontSize="18" FontAttributes="Bold" Margin="0,10,0,0" />
-        
-            <CollectionView x:Name="cvClasses" 
+
+            <CollectionView ItemsSource="{Binding Subject.Classes}" 
                             SelectionMode="Single" 
-                            SelectionChanged="OnClassSelected">
+                            SelectedItem="{Binding SelectedClass, Mode=TwoWay}"
+                            SelectionChangedCommand="{Binding GoToClassCommand}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame Margin="0,5,0,5" Padding="10" CornerRadius="8" BorderColor="LightGray" HasShadow="False">
-
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup Name="CommonStates">
-                                    <VisualState Name="Normal">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="White" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState Name="PointerOver">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="#F0F0F0" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-
                             <VerticalStackLayout Spacing="2">
-                                <Label Text="{Binding ThemeOfClass}" FontSize="16" FontAttributes="Bold" />
-                                <Label Text="{Binding TypeOfClass, StringFormat='Type: {0}'}" FontSize="14" TextColor="Gray" />
+                                <Label Text="{Binding Theme}" FontSize="16" FontAttributes="Bold" />
+                                <Label Text="{Binding Type, StringFormat='Type: {0}'}" FontSize="14" TextColor="Gray" />
                                 <Label Text="{Binding Date, StringFormat='Date: {0}'}" FontSize="14" TextColor="Gray" />
                             </VerticalStackLayout>
                         </Frame>
@@ -50,10 +35,7 @@
                 </CollectionView.ItemTemplate>
 
                 <CollectionView.EmptyView>
-                    <Label Text="No lessons for this subject" 
-                           HorizontalOptions="Center" 
-                           TextColor="Gray" 
-                           Margin="20"/>
+                    <Label Text="No lessons for this subject" HorizontalOptions="Center" TextColor="Gray" Margin="20"/>
                 </CollectionView.EmptyView>
             </CollectionView>
 

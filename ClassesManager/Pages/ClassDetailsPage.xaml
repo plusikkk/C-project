@@ -28,19 +28,19 @@
                     </Grid.RowDefinitions>
 
                     <Label Grid.Row="0" Grid.Column="0" Text="Theme:" FontAttributes="Bold" TextColor="Gray" />
-                    <Label Grid.Row="0" Grid.Column="1" x:Name="lblTheme" FontSize="16" FontAttributes="Bold" />
+                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding ClassDetails.Theme}" FontSize="16" FontAttributes="Bold" />
 
                     <Label Grid.Row="1" Grid.Column="0" Text="Type of lesson:" FontAttributes="Bold" TextColor="Gray" />
-                    <Label Grid.Row="1" Grid.Column="1" x:Name="lblType" FontSize="16" />
+                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding ClassDetails.Type}" FontSize="16" />
 
                     <Label Grid.Row="2" Grid.Column="0" Text="Date:" FontAttributes="Bold" TextColor="Gray" />
-                    <Label Grid.Row="2" Grid.Column="1" x:Name="lblDate" FontSize="16" />
+                    <Label Grid.Row="2" Grid.Column="1" Text="{Binding ClassDetails.Date}" FontSize="16" />
 
                     <Label Grid.Row="3" Grid.Column="0" Text="Time:" FontAttributes="Bold" TextColor="Gray" />
-                    <Label Grid.Row="3" Grid.Column="1" x:Name="lblTime" FontSize="16" />
+                    <Label Grid.Row="3" Grid.Column="1" Text="{Binding ClassDetails.TimeRange}" FontSize="16" />
 
                     <Label Grid.Row="4" Grid.Column="0" Text="Duration:" FontAttributes="Bold" TextColor="Gray" />
-                    <Label Grid.Row="4" Grid.Column="1" x:Name="lblDuration" FontSize="16" TextColor="DarkBlue" FontAttributes="Bold" />
+                    <Label Grid.Row="4" Grid.Column="1" Text="{Binding ClassDetails.DurationMinutes, StringFormat='{0} minutes'}" FontSize="16" TextColor="DarkBlue" FontAttributes="Bold" />
                 </Grid>
             </Frame>
 

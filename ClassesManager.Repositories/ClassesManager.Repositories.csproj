@@ -4,12 +4,9 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <RootNamespace>ClassesManager.Services</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ClassesManager.DTOModels\ClassesManager.DTOModels.csproj" />
-    <ProjectReference Include="..\ClassesManager.Repositories\ClassesManager.Repositories.csproj" />
     <ProjectReference Include="..\ClassManager.DBModels\ClassesManager.DBModels.csproj" />
   </ItemGroup>
 

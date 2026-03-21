@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassesManager.Services
+namespace ClassesManager.Repositories
 {
     //Static constructor to fill initial data
     internal static class FakeStorage

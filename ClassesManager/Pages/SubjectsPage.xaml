@@ -16,28 +16,13 @@
                    FontSize="16" 
                    TextColor="Gray" />
 
-            <CollectionView x:Name="cvSubjects" 
-                            SelectionMode="Single" 
-                            SelectionChanged="OnSubjectSelected">
+            <CollectionView ItemsSource="{Binding Subjects}"
+                SelectionMode="Single" 
+                SelectedItem="{Binding SelectedSubject, Mode=TwoWay}"
+                SelectionChangedCommand="{Binding GoToDetailsCommand}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame Margin="0,5,0,10" Padding="15" CornerRadius="10" HasShadow="True">
-
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup Name="CommonStates">
-                                    <VisualState Name="Normal">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="White" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState Name="PointerOver">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="#F0F0F0" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-
                             <VerticalStackLayout Spacing="5">
                                 <Label Text="{Binding Name}" FontSize="20" FontAttributes="Bold" />
                                 <Label Text="{Binding FieldOfKnowledge, StringFormat='Field: {0}'}" FontSize="14" TextColor="DarkSlateGray" />

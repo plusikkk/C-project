@@ -1,5 +1,7 @@
 ﻿using ClassesManager.Pages;
+using ClassesManager.Repositories;
 using ClassesManager.Services;
+using ClassesManager.ViewModels;
 using Microsoft.Extensions.Logging;
 
 namespace ClassesManager
@@ -17,8 +19,17 @@ namespace ClassesManager
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-            builder.Services.AddSingleton<IStorageService, StorageService>();
             builder.Services.AddTransient<SubjectsPage>();
+            builder.Services.AddSingleton<IStorageRepository, StorageRepository>();
+            builder.Services.AddSingleton<ISubjectService, SubjectService>();
+            builder.Services.AddSingleton<IClassService, ClassService>();
+
+            builder.Services.AddTransient<SubjectsViewModel>();
+            builder.Services.AddTransient<SubjectDetailsViewModel>();
+            builder.Services.AddTransient<ClassDetailsViewModel>();
+
+            builder.Services.AddTransient<SubjectDetailsPage>();
+            builder.Services.AddTransient<ClassDetailsPage>();
 
 #if DEBUG
             builder.Logging.AddDebug();

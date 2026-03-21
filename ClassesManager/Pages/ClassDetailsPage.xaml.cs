@@ -1,21 +1,13 @@
-using ClassesManager.UIModels;
-using System.Data;
+using ClassesManager.ViewModels;
 
 namespace ClassesManager.Pages;
 
 public partial class ClassDetailsPage : ContentPage
 {
-    public ClassDetailsPage(ClassesUIModel classModel)
+    // The UI simply binds to the injected ViewModel properties
+    public ClassDetailsPage(ClassDetailsViewModel viewModel)
     {
         InitializeComponent();
-
-        // Filling fields with data from models
-        lblTheme.Text = classModel.ThemeOfClass;
-        lblType.Text = classModel.TypeOfClass.ToString();
-        lblDate.Text = classModel.Date.ToString();
-
-        lblTime.Text = $"{classModel.StartTime} - {classModel.EndTime}";
-
-        lblDuration.Text = $"{classModel.ClassDuration} minutes";
+        BindingContext = viewModel;
     }
 }
