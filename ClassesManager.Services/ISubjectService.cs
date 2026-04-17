@@ -4,10 +4,10 @@ namespace ClassesManager.Services
 {
     public interface ISubjectService
     {
-        // returns dto for list
-        IEnumerable<SubjectListDTO> GetSubjectsList();
-
-        // returns detail dto
-        SubjectDetailsDTO GetSubjectDetails(Guid id);
+        Task<IEnumerable<SubjectListDTO>> GetSubjectsListAsync();
+        Task<SubjectDetailsDTO> GetSubjectDetailsAsync(Guid subjectId);
+        Task DeleteSubjectAsync(Guid id);
+        Task AddSubjectAsync(SubjectListDTO subject);
+        Task UpdateSubjectAsync(SubjectListDTO subject);
     }
 }

@@ -2,46 +2,38 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ClassesManager.Pages.ClassesCreatePage"
-             Title="Create new lesson">
+             Title="{Binding Title}">
+
     <ScrollView>
-        <VerticalStackLayout
-            Padding="20,20"
-            Spacing="10">
-            <Picker
-                x:Name="pSubject"
-                Title="Select a subject"
-                ItemDisplayBinding="{Binding Name}"></Picker>
-            <Label
-                Text="Date of the lesson"></Label>
-            <DatePicker
-                x:Name="dDate"></DatePicker>
-            <Label
-                Text="Start time"></Label>
-            <TimePicker
-                x:Name="tStartTime"></TimePicker>
-            <Label
-                Text="End time"></Label>
-            <TimePicker
-                x:Name="tEndTime"></TimePicker>
-            <Label
-                Text="Theme of lesson"></Label>
-            <Entry
-                x:Name="eThemeOfLesson"></Entry>
-            <Picker
-                x:Name="pTypeOfLesson"
-                Title="Select type of lesson"></Picker>
-            <Grid
-                ColumnDefinitions="*,40,*"
-                Padding="40">
-                <Button
-                    Grid.Column="2"
-                    Text="Save a lesson"
-                    Clicked="CreateClicked"></Button>
-                <Button
-                    Grid.Column="0"
-                    Text="Cancel"
-                    Clicked="CancelClicked"></Button>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Label Text="Theme of Lesson:" FontAttributes="Bold" />
+            <Entry Text="{Binding Theme}" Placeholder="Enter theme..." />
+
+            <Label Text="Type of Lesson:" FontAttributes="Bold" />
+            <Picker ItemsSource="{Binding Types}" SelectedItem="{Binding SelectedType}" />
+
+            <Label Text="Date:" FontAttributes="Bold" />
+            <DatePicker Date="{Binding Date}" />
+
+            <Grid ColumnDefinitions="*, *" ColumnSpacing="15">
+                <VerticalStackLayout Grid.Column="0" Spacing="5">
+                    <Label Text="Start Time:" FontAttributes="Bold" />
+                    <TimePicker Time="{Binding StartTime}" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="1" Spacing="5">
+                    <Label Text="End Time:" FontAttributes="Bold" />
+                    <TimePicker Time="{Binding EndTime}" />
+                </VerticalStackLayout>
             </Grid>
+
+            <Button Text="Save Lesson" 
+                    Command="{Binding SaveCommand}"
+                    BackgroundColor="Green" TextColor="White" Margin="0,20,0,0" 
+                    FontAttributes="Bold" CornerRadius="8" />
+
         </VerticalStackLayout>
     </ScrollView>
+
 </ContentPage>

@@ -1,11 +1,12 @@
 ﻿using ClassesManager.DTOModels;
-using System;
 
 namespace ClassesManager.Services
 {
     public interface IClassService
     {
-        // returns dto woth details
-        ClassDetailsDTO GetClassDetails(Guid classId);
+        Task<ClassDetailsDTO> GetClassDetailsAsync(Guid classId);
+        Task AddClassAsync(Guid subjectId, string theme, int typeIndex, DateTime date, TimeSpan start, TimeSpan end);
+        Task UpdateClassAsync(Guid classId, string theme, int typeIndex, DateTime date, TimeSpan start, TimeSpan end);
+        Task DeleteClassAsync(Guid classId);
     }
 }

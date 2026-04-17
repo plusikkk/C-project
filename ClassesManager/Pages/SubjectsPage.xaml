@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ClassesManager.Pages.SubjectsPage"
-             Title="Lessons manager">
+             Title="Lessons manager"
+             x:Name="subjectsPage">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">
@@ -12,22 +13,63 @@
                    FontAttributes="Bold" 
                    HorizontalOptions="Center" />
 
+            <Button Text="+ Add Subject" 
+                    Command="{Binding AddSubjectCommand}" 
+                    BackgroundColor="#512BD4" 
+                    TextColor="White" 
+                    FontAttributes="Bold" 
+                    CornerRadius="8" />
+
+            <Grid ColumnDefinitions="*, Auto" ColumnSpacing="10" Margin="0,5,0,5">
+                <SearchBar Grid.Column="0" 
+                       Placeholder="Search subjects..." 
+                       Text="{Binding SearchQuery, Mode=TwoWay}" />
+
+                <Picker Grid.Column="1" 
+                    ItemsSource="{Binding SortOptions}"
+                    SelectedItem="{Binding SelectedSortOption, Mode=TwoWay}" 
+                    WidthRequest="150" />
+            </Grid>
+
             <Label Text="Select a subject to see the details:" 
                    FontSize="16" 
                    TextColor="Gray" />
 
-            <CollectionView ItemsSource="{Binding Subjects}"
+            <CollectionView ItemsSource="{Binding FilteredSubjects}"
                 SelectionMode="Single" 
                 SelectedItem="{Binding SelectedSubject, Mode=TwoWay}"
                 SelectionChangedCommand="{Binding GoToDetailsCommand}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame Margin="0,5,0,10" Padding="15" CornerRadius="10" HasShadow="True">
-                            <VerticalStackLayout Spacing="5">
-                                <Label Text="{Binding Name}" FontSize="20" FontAttributes="Bold" />
-                                <Label Text="{Binding FieldOfKnowledge, StringFormat='Field: {0}'}" FontSize="14" TextColor="DarkSlateGray" />
-                                <Label Text="{Binding ECTS, StringFormat='ECTS: {0}'}" FontSize="14" TextColor="DarkSlateGray" />
-                            </VerticalStackLayout>
+
+                            <Grid ColumnDefinitions="*, Auto, Auto" ColumnSpacing="10">
+
+                                <VerticalStackLayout Grid.Column="0" Spacing="5">
+                                    <Label Text="{Binding Name}" FontSize="20" FontAttributes="Bold" />
+                                    <Label Text="{Binding FieldOfKnowledge, StringFormat='Field: {0}'}" FontSize="14" TextColor="DarkSlateGray" />
+                                    <Label Text="{Binding ECTS, StringFormat='ECTS: {0}'}" FontSize="14" TextColor="DarkSlateGray" />
+                                </VerticalStackLayout>
+
+                                <Button Grid.Column="1" 
+                                        Text="edit" 
+                                        BackgroundColor="Transparent" 
+                                        TextColor="Blue" 
+                                        FontSize="16"
+                                        VerticalOptions="Center"
+                                        Command="{Binding BindingContext.EditSubjectCommand, Source={x:Reference subjectsPage}}"
+                                        CommandParameter="{Binding .}" />
+
+                                <Button Grid.Column="2" 
+                                        Text="delete" 
+                                        BackgroundColor="Transparent" 
+                                        TextColor="Red" 
+                                        FontSize="16"
+                                        VerticalOptions="Center"
+                                        Command="{Binding BindingContext.DeleteSubjectCommand, Source={x:Reference subjectsPage}}"
+                                        CommandParameter="{Binding .}" />
+
+                            </Grid>
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

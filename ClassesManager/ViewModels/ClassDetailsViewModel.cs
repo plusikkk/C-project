@@ -8,7 +8,6 @@ namespace ClassesManager.ViewModels
     {
         private readonly IClassService _classService;
 
-        // Holds the full details of the specific class
         [ObservableProperty]
         private ClassDetailsDTO _classDetails;
 
@@ -17,10 +16,10 @@ namespace ClassesManager.ViewModels
             _classService = classService;
         }
 
-        // Loads data from the service using the provided ID
-        public void LoadData(Guid classId)
+        // async method
+        public async Task LoadDataAsync(Guid classId)
         {
-            ClassDetails = _classService.GetClassDetails(classId);
+            ClassDetails = await _classService.GetClassDetailsAsync(classId);
         }
     }
 }

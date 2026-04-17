@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ClassesManager.Pages.SubjectEditPage"
+             Title="{Binding Title}">
+
+    <VerticalStackLayout Padding="20" Spacing="15">
+        <Label Text="Subject Name:" FontAttributes="Bold" />
+        <Entry Text="{Binding Name}" Placeholder="Enter name..." />
+
+        <Label Text="ECTS Credits:" FontAttributes="Bold" />
+        <Entry Text="{Binding Ects}" Keyboard="Numeric" />
+
+        <Label Text="Field of Knowledge:" FontAttributes="Bold" />
+        <Picker ItemsSource="{Binding Fields}" SelectedItem="{Binding SelectedField}" />
+
+        <Button Text="Save Changes" 
+                Command="{Binding SaveCommand}"
+                BackgroundColor="Green" TextColor="White" Margin="0,20,0,0" />
+    </VerticalStackLayout>
+
+</ContentPage>

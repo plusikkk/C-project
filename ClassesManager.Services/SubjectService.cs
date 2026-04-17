@@ -1,75 +1,84 @@
-﻿using ClassesManager.DTOModels;
+﻿using ClassesManager.CommonComponents.Enums;
+using ClassesManager.DBModels;
+using ClassesManager.DTOModels;
 using ClassesManager.Repositories;
 
 namespace ClassesManager.Services
 {
     public class SubjectService : ISubjectService
     {
-        // Service acts with repository through the interface (Dependency Inversion)
-        private readonly IStorageRepository _repository;
+        private readonly IStorageRepository _storageRepository;
 
-        public SubjectService(IStorageRepository repository)
+        public SubjectService(IStorageRepository storageRepository)
         {
-            _repository = repository;
+            _storageRepository = storageRepository;
         }
 
-        public IEnumerable<SubjectListDTO> GetSubjectsList()
+        public async Task<IEnumerable<SubjectListDTO>> GetSubjectsListAsync()
         {
-            var dbSubjects = _repository.GetAllSubjects();
-            var dtoList = new List<SubjectListDTO>();
+            await _storageRepository.InitializeDataAsync();
+            // calling async method via await
+            var dbSubjects = await _storageRepository.GetAllSubjectsAsync();
 
-            // Converts dbmodels to dto
-            foreach (var dbModel in dbSubjects)
+            return dbSubjects.Select(s => new SubjectListDTO
             {
-                dtoList.Add(new SubjectListDTO
-                {
-                    Id = dbModel.Id,
-                    Name = dbModel.Name,
-                    ECTS = dbModel.ECTS,
-                    FieldOfKnowledge = dbModel.FieldOfKnowledge.ToString()
-                });
-            }
-
-            return dtoList;
+                Id = s.Id,
+                Name = s.Name,
+                FieldOfKnowledge = s.FieldOfKnowledge.ToString(),
+                ECTS = s.ECTS
+            });
         }
 
-        public SubjectDetailsDTO GetSubjectDetails(Guid id)
+        public async Task<SubjectDetailsDTO> GetSubjectDetailsAsync(Guid subjectId)
         {
-            // find the subject
-            var dbSubject = _repository.GetAllSubjects().FirstOrDefault(s => s.Id == id);
+            var dbSubject = await _storageRepository.GetSubjectByIdAsync(subjectId);
             if (dbSubject == null) return null;
 
-            // find the classes
-            var dbClasses = _repository.GetAllClasses(id);
+            var dbClasses = await _storageRepository.GetAllClassesAsync(subjectId);
 
-            var detailsDto = new SubjectDetailsDTO
+            var classesDTO = dbClasses.Select(c => new ClassListDTO
+            {
+                Id = c.Id,
+                Theme = c.ThemeOfClass,
+                Date = c.Date.ToString("dd.MM.yyyy"),
+                Type = c.TypeOfClass.ToString()
+            }).ToList();
+
+            int totalMinutes = (int)dbClasses.Sum(c => (c.EndTime - c.StartTime).TotalMinutes);
+
+            return new SubjectDetailsDTO
             {
                 Id = dbSubject.Id,
                 Name = dbSubject.Name,
-                ECTS = dbSubject.ECTS,
                 FieldOfKnowledge = dbSubject.FieldOfKnowledge.ToString(),
-                Classes = new List<ClassListDTO>()
+                ECTS = dbSubject.ECTS,
+                Classes = classesDTO,
+                TotalDuration = totalMinutes
             };
+        }
 
-            int totalDuration = 0;
+        public async Task DeleteSubjectAsync(Guid id)
+        {
+            // async deleting
+            await _storageRepository.DeleteSubjectAsync(id);
+        }
 
-            // Converts classes to dto
-            foreach (var cls in dbClasses)
+        public async Task AddSubjectAsync(SubjectListDTO subject)
+        {
+            var dbModel = new SubjectDBModel(subject.Name, subject.ECTS, Enum.Parse<FieldOfKnowledge>(subject.FieldOfKnowledge));
+            await _storageRepository.AddSubjectAsync(dbModel);
+        }
+
+        public async Task UpdateSubjectAsync(SubjectListDTO subject)
+        {
+            var dbModel = await _storageRepository.GetSubjectByIdAsync(subject.Id);
+            if (dbModel != null)
             {
-                int duration = (int)(cls.EndTime - cls.StartTime).TotalMinutes;
-                totalDuration += duration;
-
-                detailsDto.Classes.Add(new ClassListDTO
-                {
-                    Id = cls.Id,
-                    Theme = cls.ThemeOfClass,
-                    Date = cls.Date.ToString(),
-                    Type = cls.TypeOfClass.ToString()
-                });
+                dbModel.Name = subject.Name;
+                dbModel.ECTS = subject.ECTS;
+                dbModel.FieldOfKnowledge = Enum.Parse<FieldOfKnowledge>(subject.FieldOfKnowledge);
+                await _storageRepository.UpdateSubjectAsync(dbModel);
             }
-
-            detailsDto.TotalDuration = totalDuration;
-            return detailsDto;
         }
     }
 }

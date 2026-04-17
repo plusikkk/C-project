@@ -31,6 +31,12 @@ namespace ClassesManager
             builder.Services.AddTransient<SubjectDetailsPage>();
             builder.Services.AddTransient<ClassDetailsPage>();
 
+            builder.Services.AddTransient<SubjectEditViewModel>();
+            builder.Services.AddTransient<SubjectEditPage>();
+
+            builder.Services.AddTransient<ClassEditViewModel>();
+            builder.Services.AddTransient<ClassesCreatePage>();
+
 #if DEBUG
             builder.Logging.AddDebug();
 #endif

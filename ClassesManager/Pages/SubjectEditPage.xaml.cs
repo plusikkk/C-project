@@ -1,10 +1,9 @@
 using ClassesManager.ViewModels;
-
 namespace ClassesManager.Pages;
 
-public partial class ClassesCreatePage : ContentPage
+public partial class SubjectEditPage : ContentPage
 {
-    public ClassesCreatePage(ClassEditViewModel viewModel)
+    public SubjectEditPage(SubjectEditViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = viewModel;

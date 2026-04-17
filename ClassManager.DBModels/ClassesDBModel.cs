@@ -9,7 +9,7 @@ namespace ClassesManager.DBModels
 {
     public class ClassesDBModel
     {
-        public Guid Id { get; init;  } //Id is generated only once and cannot be changed
+        public Guid Id { get; set;  } //Id is generated only once and cannot be changed
         public Guid SubjectId { get; init; } //Foreign key for connection with Subject
         public DateOnly Date {  get; set; }
         public TimeOnly StartTime { get; set; }
@@ -17,7 +17,7 @@ namespace ClassesManager.DBModels
         public string ThemeOfClass { get; set; }
         public TypeOfClass TypeOfClass { get; set; }
 
-        private ClassesDBModel() 
+        public ClassesDBModel() 
         { 
         
         }
